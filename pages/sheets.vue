@@ -4,7 +4,7 @@
       Tabelas
       <v-spacer />
       <v-btn icon outlined>
-        <v-icon>fas fa-plus</v-icon>
+        <v-icon>fas fa-file-upload</v-icon>
       </v-btn>
       <v-spacer />
       <v-text-field
@@ -22,12 +22,12 @@
     >
       <template #item.edit>
         <v-btn icon small>
-          <v-icon>fas fa-pen</v-icon>
+          <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
       </template>
       <template #item.delete>
         <v-btn icon small>
-          <v-icon>fas fa-trash</v-icon>
+          <v-icon>mdi-trash-can-outline</v-icon>
         </v-btn>
       </template>
     </v-data-table>

@@ -18,7 +18,7 @@
     >
       <template #item.edit>
         <v-btn icon small>
-          <v-icon>fas fa-pen</v-icon>
+          <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
       </template>
     </v-data-table>

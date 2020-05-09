@@ -45,17 +45,17 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-file-excel-outline',
           title: 'Tabelas',
           to: '/sheets'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-file-document-outline',
           title: 'Disciplinas',
           to: '/classes'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-cog',
           title: 'Configurações',
           to: '/configuration'
         }
