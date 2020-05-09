@@ -51,7 +51,7 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Matérias',
+          title: 'Disciplinas',
           to: '/classes'
         },
         {
