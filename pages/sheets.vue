@@ -1,8 +1,36 @@
 <template>
   <v-card>
-    <v-card-title>Tabelas</v-card-title>
+    <v-card-title>
+      Tabelas
+      <v-spacer />
+      <v-btn icon outlined>
+        <v-icon>fas fa-plus</v-icon>
+      </v-btn>
+      <v-spacer />
+      <v-text-field
+        v-model="dataTable.search"
+        label="Pesquisar"
+        outlined
+        append-icon="fas fa-search"
+      />
+    </v-card-title>
     <v-divider />
-    <v-data-table :headers="dataTable.headers" />
+    <v-data-table
+      :headers="dataTable.headers"
+      :items="dataTable.test"
+      :search="dataTable.search"
+    >
+      <template #item.edit>
+        <v-btn icon small>
+          <v-icon>fas fa-pen</v-icon>
+        </v-btn>
+      </template>
+      <template #item.delete>
+        <v-btn icon small>
+          <v-icon>fas fa-trash</v-icon>
+        </v-btn>
+      </template>
+    </v-data-table>
   </v-card>
 </template>
 
@@ -13,10 +41,17 @@ export default {
   data: () => ({
     dataTable: {
       headers: [
-        { text: 'Disciplina' },
-        { text: 'Ano' },
-        { text: 'Semestre' },
-        { text: 'Ações', value: 'edit' }
+        { text: 'Disciplina', value: 'class' },
+        { text: 'Ano', value: 'year' },
+        { text: 'Semestre', value: 'semester' },
+        { text: 'Editar', value: 'edit' },
+        { text: 'Excluir', value: 'delete' }
+      ],
+      search: '',
+      test: [
+        { class: 'Geometria Analítica', year: '2019', semester: '1' },
+        { class: 'Geometria Analítica', year: '2018', semester: '1' },
+        { class: 'Cálculo II', year: '2018', semester: '1' }
       ]
     }
   })
