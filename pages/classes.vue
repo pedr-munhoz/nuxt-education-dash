@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'SheetsPage',
+  name: 'ClassesPage',
 
   data: () => ({
     dataTable: {
