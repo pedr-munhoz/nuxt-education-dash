@@ -19,6 +19,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar clipped-left fixed app>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title v-text="title" />
     </v-app-bar>
     <v-content>
@@ -26,7 +27,7 @@
         <nuxt />
       </v-container>
     </v-content>
-    <v-footer :fixed="fixed" app>
+    <v-footer app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -36,9 +37,7 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: true,
-      fixed: false,
+      drawer: false,
       items: [
         {
           icon: 'mdi-apps',
@@ -47,18 +46,20 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'Tabelas',
+          to: '/sheets'
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Tabelas',
-          to: '/sheets'
+          title: 'Matérias',
+          to: '/classes'
+        },
+        {
+          icon: 'mdi-chart-bubble',
+          title: 'Configurações',
+          to: '/configuration'
         }
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
       title: 'Vuetify.js'
     };
   }
