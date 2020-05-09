@@ -1,11 +1,24 @@
 <template>
   <v-card>
-    <v-card-title>Configurações</v-card-title>
+    <v-card-title>
+      Configurações
+      <v-spacer />
+      <v-text-field
+        v-model="dataTable.search"
+        label="Pesquisar"
+        outlined
+        append-icon="fas fa-search"
+      />
+    </v-card-title>
     <v-divider />
-    <v-data-table :headers="dataTable.headers" :items="fields" :item-key="id">
+    <v-data-table
+      :headers="dataTable.headers"
+      :items="fields"
+      :search="dataTable.search"
+    >
       <template #item.edit>
-        <v-btn outlined small>
-          editar
+        <v-btn icon small>
+          <v-icon>fas fa-pen</v-icon>
         </v-btn>
       </template>
     </v-data-table>
@@ -22,14 +35,19 @@ export default {
         { text: 'Campo', value: 'title' },
         { text: 'Literal na tabela', value: 'value' },
         { text: 'Editar', value: 'edit' }
-      ]
+      ],
+      search: ''
     },
 
     fields: [
-      { title: 'ID aluno', id: 1, value: '' },
-      { title: 'Presença', id: 2, value: '' },
-      { title: 'Média', id: 3, value: '' },
-      { title: 'Aprovação', id: 4, value: '' }
+      { title: 'ID aluno', value: '' },
+      { title: 'Primeira avaliação', value: '' },
+      { title: 'Segunda avaliação', value: '' },
+      { title: 'Terceira avaliação', value: '' },
+      { title: 'Quarta avaliação', value: '' },
+      { title: 'Presença', value: '' },
+      { title: 'Média', value: '' },
+      { title: 'Aprovação', value: '' }
     ]
   })
 };
