@@ -16,7 +16,7 @@ export default {
         { text: 'Disciplina' },
         { text: 'Ano' },
         { text: 'Semestre' },
-        { text: 'Excluir', value: 'delete' }
+        { text: 'Ações', value: 'edit' }
       ]
     }
   })
