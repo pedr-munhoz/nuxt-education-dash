@@ -1,4 +1,4 @@
-import colors from 'vuetify/es5/util/colors'
+import colors from 'vuetify/es5/util/colors';
 
 export default {
   mode: 'universal',
@@ -26,7 +26,10 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '@fortawesome/fontawesome-free/css/all.css',
+    '@fortawesome/fontawesome-free/js/all.js'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
@@ -58,7 +61,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -81,4 +84,4 @@ export default {
      */
     extend(config, ctx) {}
   }
-}
+};
