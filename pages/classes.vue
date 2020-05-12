@@ -61,12 +61,14 @@ export default {
 
   computed: {
     classes() {
-      return this.$store.state.classes.all;
+      return this.$store.state.classes.list;
     }
   },
 
   methods: {
-    createClass(newClass) {}
+    createClass(newClass) {
+      this.$store.commit('classes/add', { title: newClass });
+    }
   }
 };
 </script>
