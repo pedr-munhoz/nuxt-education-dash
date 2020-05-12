@@ -60,7 +60,7 @@ export default {
           to: '/configuration'
         }
       ],
-      title: 'Vuetify.js'
+      title: 'Dashboard.edu'
     };
   }
 };
