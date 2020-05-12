@@ -56,14 +56,17 @@ export default {
         { text: 'Excluir', value: 'delete' }
       ],
       search: ''
-    },
-    classes: []
+    }
   }),
 
-  methods: {
-    createClass(newClass) {
-      this.classes.push({ title: newClass });
+  computed: {
+    classes() {
+      return this.$store.state.classes.all;
     }
+  },
+
+  methods: {
+    createClass(newClass) {}
   }
 };
 </script>
