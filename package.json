@@ -18,7 +18,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "@nuxtjs/axios": "^5.3.6",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "xlsx": "^0.16.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
