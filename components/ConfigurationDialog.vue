@@ -50,6 +50,7 @@ export default {
     },
 
     confirm() {
+      this.$emit('update', this.value);
       this.close();
     }
   }

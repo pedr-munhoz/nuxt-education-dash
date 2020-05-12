@@ -17,7 +17,10 @@
       :search="dataTable.search"
     >
       <template #item.edit="{ item }">
-        <configuration-dialog :title="item.title" />
+        <configuration-dialog
+          :title="item.title"
+          @update="item.value = $event"
+        />
       </template>
     </v-data-table>
   </v-card>
