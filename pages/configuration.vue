@@ -4,6 +4,7 @@
       <v-container>
         <v-row>
           <v-col>Configurações</v-col>
+          <v-col />
           <v-col>
             <v-text-field
               v-model="dataTable.search"
