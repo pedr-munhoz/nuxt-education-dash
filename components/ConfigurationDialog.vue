@@ -10,7 +10,7 @@
         {{ title }}
         <v-spacer />
         <v-btn small color="red" icon @click="close()">
-          <v-icon>fas fa-times</v-icon>
+          <v-icon>mdi-close-thick</v-icon>
         </v-btn>
       </v-card-title>
       <v-divider />
@@ -20,7 +20,7 @@
       <v-card-actions>
         <v-spacer />
         <v-btn outlined @click="confirm()">
-          <v-icon>fas fa-check</v-icon>
+          <v-icon>mdi-check-bold</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
