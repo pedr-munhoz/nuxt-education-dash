@@ -16,18 +16,22 @@
       :items="fields"
       :search="dataTable.search"
     >
-      <template #item.edit>
-        <v-btn icon small>
-          <v-icon>mdi-pencil-outline</v-icon>
-        </v-btn>
+      <template #item.edit="{ item }">
+        <configuration-dialog :title="item.title" />
       </template>
     </v-data-table>
   </v-card>
 </template>
 
 <script>
+import ConfigurationDialog from '@/components/ConfigurationDialog.vue';
+
 export default {
   name: 'ConfigurationPage',
+
+  components: {
+    ConfigurationDialog
+  },
 
   data: () => ({
     dataTable: {
