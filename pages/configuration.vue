@@ -23,7 +23,7 @@
       <template #item.edit="{ item }">
         <configuration-dialog
           :title="item.title"
-          @update="item.value = $event"
+          @update="update(item, $event)"
         />
       </template>
     </v-data-table>
@@ -48,19 +48,22 @@ export default {
         { text: 'Editar', value: 'edit' }
       ],
       search: ''
-    },
+    }
+  }),
 
-    fields: [
-      { title: 'ID aluno', value: '' },
-      { title: 'Primeira avaliação', value: '' },
-      { title: 'Segunda avaliação', value: '' },
-      { title: 'Terceira avaliação', value: '' },
-      { title: 'Quarta avaliação', value: '' },
-      { title: 'Presença', value: '' },
-      { title: 'Média', value: '' },
-      { title: 'Aprovação', value: '' }
-    ]
-  })
+  computed: {
+    fields() {
+      return this.$store.state.configuration.fields;
+    }
+  },
+
+  methods: {
+    update(field, value) {
+      const copy = { ...field };
+      copy.value = value;
+      this.$store.commit('configuration/set', copy);
+    }
+  }
 };
 </script>
 
