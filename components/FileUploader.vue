@@ -93,6 +93,7 @@ export default {
     },
 
     confirm() {
+      this.$store.commit('sheets/add', this.file);
       this.close();
     }
   }

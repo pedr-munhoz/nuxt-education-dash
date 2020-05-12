@@ -1,9 +1,5 @@
 export const state = () => ({
-  list: [
-    { title: 'Inteligência Artifical' },
-    { title: 'Estrutura de Dados I' },
-    { title: 'Pesquisa Operacional' }
-  ]
+  list: []
 });
 
 export const mutations = {

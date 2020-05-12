@@ -21,7 +21,7 @@
     <v-divider />
     <v-data-table
       :headers="dataTable.headers"
-      :items="dataTable.test"
+      :items="sheets"
       :search="dataTable.search"
     >
       <template #item.edit>
@@ -64,7 +64,13 @@ export default {
         { class: 'Cálculo II', year: '2018', semester: '1' }
       ]
     }
-  })
+  }),
+
+  computed: {
+    sheets() {
+      return this.$store.state.sheets.list;
+    }
+  }
 };
 </script>
 
