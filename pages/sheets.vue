@@ -5,9 +5,7 @@
         <v-row>
           <v-col>Tabelas</v-col>
           <v-col>
-            <v-btn icon outlined>
-              <v-icon>mdi-file-upload</v-icon>
-            </v-btn>
+            <file-uploader />
           </v-col>
           <v-col>
             <v-text-field
@@ -41,8 +39,14 @@
 </template>
 
 <script>
+import FileUploader from '@/components/FileUploader.vue';
+
 export default {
   name: 'SheetsPage',
+
+  components: {
+    FileUploader
+  },
 
   data: () => ({
     dataTable: {
