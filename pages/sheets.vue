@@ -1,18 +1,24 @@
 <template>
   <v-card>
     <v-card-title>
-      Tabelas
-      <v-spacer />
-      <v-btn icon outlined>
-        <v-icon>fas fa-file-upload</v-icon>
-      </v-btn>
-      <v-spacer />
-      <v-text-field
-        v-model="dataTable.search"
-        label="Pesquisar"
-        outlined
-        append-icon="fas fa-search"
-      />
+      <v-container>
+        <v-row>
+          <v-col>Tabelas</v-col>
+          <v-col>
+            <v-btn icon outlined>
+              <v-icon>mdi-file-upload</v-icon>
+            </v-btn>
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="dataTable.search"
+              label="Pesquisar"
+              outlined
+              append-icon="mdi-magnify"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-title>
     <v-divider />
     <v-data-table

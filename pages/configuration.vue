@@ -1,9 +1,20 @@
 <template>
   <v-card>
     <v-card-title>
-      Configurações
+      <v-container>
+        <v-row>
+          <v-col>Configurações</v-col>
+          <v-col>
+            <v-text-field
+              v-model="dataTable.search"
+              label="Pesquisar"
+              outlined
+              append-icon="mdi-magnify"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-title>
-    <v-divider />
     <v-data-table
       :headers="dataTable.headers"
       :items="fields"

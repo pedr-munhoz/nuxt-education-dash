@@ -1,7 +1,22 @@
 <template>
   <v-card>
     <v-card-title>
-      Disciplinas
+      <v-container>
+        <v-row>
+          <v-col>Disciplinas</v-col>
+          <v-col>
+            <class-creator />
+          </v-col>
+          <v-col>
+            <v-text-field
+              v-model="dataTable.search"
+              label="Pesquisar"
+              outlined
+              append-icon="mdi-magnify"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card-title>
     <v-divider />
     <v-data-table :headers="dataTable.headers" :search="dataTable.search">
@@ -20,8 +35,14 @@
 </template>
 
 <script>
+import ClassCreator from '@/components/ClassCreator.vue';
+
 export default {
   name: 'ClassesPage',
+
+  components: {
+    ClassCreator
+  },
 
   data: () => ({
     dataTable: {

@@ -1,8 +1,8 @@
 <template>
   <v-dialog v-model="dialog" width="640px">
-    <template #octivator="{ on }">
+    <template #activator="{ on }">
       <v-btn icon outlined v-on="on">
-        <v-icon>fas fa-plus</v-icon>
+        <v-icon>mdi-plus</v-icon>
       </v-btn>
     </template>
   </v-dialog>
