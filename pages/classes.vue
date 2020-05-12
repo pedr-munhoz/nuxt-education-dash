@@ -5,7 +5,7 @@
         <v-row>
           <v-col>Disciplinas</v-col>
           <v-col>
-            <class-creator />
+            <class-creator @update="createClass($event)" />
           </v-col>
           <v-col>
             <v-text-field
@@ -19,10 +19,14 @@
       </v-container>
     </v-card-title>
     <v-divider />
-    <v-data-table :headers="dataTable.headers" :search="dataTable.search">
+    <v-data-table
+      :items="classes"
+      :headers="dataTable.headers"
+      :search="dataTable.search"
+    >
       <template #item.edit>
         <v-btn icon small>
-          <v-icon>fas fa-pen</v-icon>
+          <v-icon>mdi-pencil-outline</v-icon>
         </v-btn>
       </template>
       <template #item.delete>
@@ -47,14 +51,19 @@ export default {
   data: () => ({
     dataTable: {
       headers: [
-        { text: 'Nome' },
+        { text: 'Nome', value: 'title' },
         { text: 'Editar', value: 'edit' },
         { text: 'Excluir', value: 'delete' }
       ],
       search: ''
+    },
+    classes: []
+  }),
+
+  methods: {
+    createClass(newClass) {
+      this.classes.push({ title: newClass });
     }
-  })
+  }
 };
 </script>
-
-<style></style>
