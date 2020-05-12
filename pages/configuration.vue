@@ -2,13 +2,6 @@
   <v-card>
     <v-card-title>
       Configurações
-      <v-spacer />
-      <v-text-field
-        v-model="dataTable.search"
-        label="Pesquisar"
-        outlined
-        append-icon="fas fa-search"
-      />
     </v-card-title>
     <v-divider />
     <v-data-table
