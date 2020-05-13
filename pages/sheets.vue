@@ -45,7 +45,7 @@ export default {
   name: 'SheetsPage',
 
   components: {
-    FileUploader
+    FileUploader,
   },
 
   data: () => ({
@@ -55,22 +55,22 @@ export default {
         { text: 'Ano', value: 'year' },
         { text: 'Semestre', value: 'semester' },
         { text: 'Editar', value: 'edit' },
-        { text: 'Excluir', value: 'delete' }
+        { text: 'Excluir', value: 'delete' },
       ],
       search: '',
       test: [
         { class: 'Geometria Analítica', year: '2019', semester: '1' },
         { class: 'Geometria Analítica', year: '2018', semester: '1' },
-        { class: 'Cálculo II', year: '2018', semester: '1' }
-      ]
-    }
+        { class: 'Cálculo II', year: '2018', semester: '1' },
+      ],
+    },
   }),
 
   computed: {
     sheets() {
       return this.$store.state.sheets.list;
-    }
-  }
+    },
+  },
 };
 </script>
 

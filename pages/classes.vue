@@ -45,7 +45,7 @@ export default {
   name: 'ClassesPage',
 
   components: {
-    ClassCreator
+    ClassCreator,
   },
 
   data: () => ({
@@ -53,22 +53,22 @@ export default {
       headers: [
         { text: 'Nome', value: 'title' },
         { text: 'Editar', value: 'edit' },
-        { text: 'Excluir', value: 'delete' }
+        { text: 'Excluir', value: 'delete' },
       ],
-      search: ''
-    }
+      search: '',
+    },
   }),
 
   computed: {
     classes() {
       return this.$store.state.classes.list;
-    }
+    },
   },
 
   methods: {
     createClass(newClass) {
       this.$store.commit('classes/add', { title: newClass });
-    }
-  }
+    },
+  },
 };
 </script>

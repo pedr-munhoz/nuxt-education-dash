@@ -62,7 +62,7 @@ export default {
   name: 'FileUploader',
 
   components: {
-    FileReader
+    FileReader,
   },
 
   data: () => ({
@@ -71,15 +71,15 @@ export default {
       class: '',
       year: '',
       semester: '',
-      data: ''
+      data: '',
     },
-    possibleSemesters: [1, 2]
+    possibleSemesters: [1, 2],
   }),
 
   computed: {
     classes() {
       return this.$store.state.classes.list;
-    }
+    },
   },
 
   methods: {
@@ -95,8 +95,8 @@ export default {
     confirm() {
       this.$store.commit('sheets/add', this.file);
       this.close();
-    }
-  }
+    },
+  },
 };
 </script>
 

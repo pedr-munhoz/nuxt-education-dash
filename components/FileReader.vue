@@ -13,8 +13,8 @@ export default {
 
       reader.onload = (e) => this.$emit('load', e.target.result);
       reader.readAsText(file);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -39,7 +39,7 @@ export default {
 
         this.$emit('load', json);
       };
-    }
-  }
+    },
+  },
 };
 </script>

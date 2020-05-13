@@ -38,7 +38,7 @@ export default {
   name: 'ConfigurationPage',
 
   components: {
-    ConfigurationDialog
+    ConfigurationDialog,
   },
 
   data: () => ({
@@ -46,16 +46,16 @@ export default {
       headers: [
         { text: 'Campo', value: 'title' },
         { text: 'Literal na tabela', value: 'value' },
-        { text: 'Editar', value: 'edit' }
+        { text: 'Editar', value: 'edit' },
       ],
-      search: ''
-    }
+      search: '',
+    },
   }),
 
   computed: {
     fields() {
       return this.$store.state.configuration.fields;
-    }
+    },
   },
 
   methods: {
@@ -63,8 +63,8 @@ export default {
       const copy = { ...field };
       copy.value = value;
       this.$store.commit('configuration/set', copy);
-    }
-  }
+    },
+  },
 };
 </script>
 

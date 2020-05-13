@@ -1,9 +1,9 @@
 export const state = () => ({
-  list: []
+  list: [],
 });
 
 export const mutations = {
   add(state, newSheet) {
     state.list.push(newSheet);
-  }
+  },
 };

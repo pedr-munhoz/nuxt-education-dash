@@ -35,13 +35,13 @@ export default {
     title: {
       type: String,
       required: true,
-      default: ''
-    }
+      default: '',
+    },
   },
 
   data: () => ({
     dialog: false,
-    value: ''
+    value: '',
   }),
 
   methods: {
@@ -52,7 +52,7 @@ export default {
     confirm() {
       this.$emit('update', this.value);
       this.close();
-    }
-  }
+    },
+  },
 };
 </script>

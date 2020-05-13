@@ -42,26 +42,26 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Home',
-          to: '/'
+          to: '/',
         },
         {
           icon: 'mdi-file-excel-outline',
           title: 'Tabelas',
-          to: '/sheets'
+          to: '/sheets',
         },
         {
           icon: 'mdi-file-document-outline',
           title: 'Disciplinas',
-          to: '/classes'
+          to: '/classes',
         },
         {
           icon: 'mdi-cog',
           title: 'Configurações',
-          to: '/configuration'
-        }
+          to: '/configuration',
+        },
       ],
-      title: 'Dashboard.edu'
+      title: 'Dashboard.edu',
     };
-  }
+  },
 };
 </script>
