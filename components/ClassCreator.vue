@@ -1,8 +1,11 @@
 <template>
   <v-dialog v-model="dialog" width="640px">
     <template #activator="{ on }">
-      <v-btn icon outlined v-on="on">
+      <v-btn v-if="!update" icon outlined v-on="on">
         <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn v-if="update" icon small v-on="on">
+        <v-icon>mdi-pencil-outline</v-icon>
       </v-btn>
     </template>
     <v-card>
@@ -30,6 +33,14 @@
 <script>
 export default {
   name: 'ClassCreator',
+
+  props: {
+    update: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+  },
 
   data: () => ({
     dialog: false,

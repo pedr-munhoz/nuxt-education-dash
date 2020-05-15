@@ -24,10 +24,8 @@
       :headers="dataTable.headers"
       :search="dataTable.search"
     >
-      <template #item.edit>
-        <v-btn icon small>
-          <v-icon>mdi-pencil-outline</v-icon>
-        </v-btn>
+      <template #item.edit="{ item }">
+        <class-creator update @update="updateClass(item, $event)" />
       </template>
       <template #item.delete>
         <v-btn icon small>
@@ -68,6 +66,12 @@ export default {
   methods: {
     createClass(newClass) {
       this.$store.dispatch('classes/createClass', { title: newClass });
+    },
+    updateClass(currentClass, newClass) {
+      this.$store.dispatch('classes/updateClass', {
+        title: newClass,
+        id: currentClass.id,
+      });
     },
   },
 };
