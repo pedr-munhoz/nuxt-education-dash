@@ -68,7 +68,7 @@ export default {
 
   computed: {
     sheets() {
-      return this.$store.state.sheets.list;
+      return this.$store.getters['sheets/getSheets'];
     },
   },
 };

@@ -78,7 +78,7 @@ export default {
 
   computed: {
     classes() {
-      return this.$store.state.classes.list;
+      return this.$store.getters['classes/getClasses'];
     },
   },
 
@@ -93,7 +93,7 @@ export default {
     },
 
     confirm() {
-      this.$store.commit('sheets/add', this.file);
+      this.$store.dispatch('sheets/saveSheet', this.file);
       this.close();
     },
   },
