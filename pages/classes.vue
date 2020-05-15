@@ -61,13 +61,13 @@ export default {
 
   computed: {
     classes() {
-      return this.$store.state.classes.list;
+      return this.$store.getters['classes/getClasses'];
     },
   },
 
   methods: {
     createClass(newClass) {
-      this.$store.commit('classes/add', { title: newClass });
+      this.$store.dispatch('classes/createClass', { title: newClass });
     },
   },
 };
