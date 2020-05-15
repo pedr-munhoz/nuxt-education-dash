@@ -27,8 +27,8 @@
       <template #item.edit="{ item }">
         <class-creator update @update="updateClass(item, $event)" />
       </template>
-      <template #item.delete>
-        <v-btn icon small>
+      <template #item.delete="{ item }">
+        <v-btn icon small @click="deleteClass(item)">
           <v-icon>mdi-trash-can-outline</v-icon>
         </v-btn>
       </template>
@@ -72,6 +72,9 @@ export default {
         title: newClass,
         id: currentClass.id,
       });
+    },
+    deleteClass(currentClass) {
+      this.$store.dispatch('classes/deleteClass', currentClass);
     },
   },
 };
