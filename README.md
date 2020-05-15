@@ -1,6 +1,6 @@
 # nuxt-educational-dash
 
-> My divine Nuxt.js project
+> My adaptive educational dashboard build on Nuxt.js and Vuetify.
 
 ## Build Setup
 
