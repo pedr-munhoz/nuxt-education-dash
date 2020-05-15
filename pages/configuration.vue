@@ -54,7 +54,6 @@ export default {
 
   computed: {
     fields() {
-      // return [];
       return this.$store.getters['configuration/getFields'];
     },
   },
