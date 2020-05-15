@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 export const state = () => ({
   sheets_list: [],
 });
@@ -16,6 +18,7 @@ export const mutations = {
 
 export const actions = {
   saveSheet({ commit }, newSheet) {
-    commit('ADD_SHEET', newSheet);
+    const sheet = { ...newSheet, id: uuidv4() };
+    commit('ADD_SHEET', sheet);
   },
 };
