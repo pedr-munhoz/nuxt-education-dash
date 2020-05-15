@@ -54,7 +54,8 @@ export default {
 
   computed: {
     fields() {
-      return this.$store.state.configuration.fields;
+      // return [];
+      return this.$store.getters['configuration/getFields'];
     },
   },
 
@@ -62,7 +63,7 @@ export default {
     update(field, value) {
       const copy = { ...field };
       copy.value = value;
-      this.$store.commit('configuration/set', copy);
+      this.$store.dispatch('configuration/updateField', copy);
     },
   },
 };
