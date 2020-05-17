@@ -31,7 +31,6 @@ export default {
       reader.onload = (e) => {
         var data = new Uint8Array(reader.result);
         var wb = XLSX.read(data, { type: 'array' });
-        console.log(wb);
         var sheet = {};
         sheet.name = wb.SheetNames[0];
         sheet.data = wb.Sheets[sheet.name];
