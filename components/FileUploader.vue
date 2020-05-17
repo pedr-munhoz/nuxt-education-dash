@@ -80,6 +80,9 @@ export default {
     classes() {
       return this.$store.getters['classes/getClasses'];
     },
+    fields() {
+      return this.$store.getters['configuration/getFields'];
+    },
   },
 
   methods: {
@@ -93,6 +96,11 @@ export default {
     },
 
     confirm() {
+      this.file.data.forEach((element) => {
+        this.fields.forEach((field) => {
+          element[field.id] = element[field.value];
+        });
+      });
       this.$store.dispatch('sheets/saveSheet', this.file);
       this.close();
     },
