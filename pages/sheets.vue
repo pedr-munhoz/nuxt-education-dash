@@ -24,13 +24,8 @@
       :items="sheets"
       :search="dataTable.search"
     >
-      <template #item.edit>
-        <v-btn icon small>
-          <v-icon>mdi-pencil-outline</v-icon>
-        </v-btn>
-      </template>
-      <template #item.delete>
-        <v-btn icon small>
+      <template #item.delete="{ item }">
+        <v-btn icon small @click="deleteSheet(item)">
           <v-icon>mdi-trash-can-outline</v-icon>
         </v-btn>
       </template>
@@ -54,21 +49,21 @@ export default {
         { text: 'Disciplina', value: 'class' },
         { text: 'Ano', value: 'year' },
         { text: 'Semestre', value: 'semester' },
-        { text: 'Editar', value: 'edit' },
         { text: 'Excluir', value: 'delete' },
       ],
       search: '',
-      test: [
-        { class: 'Geometria Analítica', year: '2019', semester: '1' },
-        { class: 'Geometria Analítica', year: '2018', semester: '1' },
-        { class: 'Cálculo II', year: '2018', semester: '1' },
-      ],
     },
   }),
 
   computed: {
     sheets() {
       return this.$store.getters['sheets/getSheets'];
+    },
+  },
+
+  methods: {
+    deleteSheet(oldSheet) {
+      this.$store.dispatch('sheets/deleteSheet', oldSheet);
     },
   },
 };
