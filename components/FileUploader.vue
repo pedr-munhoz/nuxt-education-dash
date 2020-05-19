@@ -23,6 +23,7 @@
                 :items="classes"
                 item-text="title"
                 label="Disciplina"
+                return-object
                 outlined
               />
             </v-col>

@@ -46,7 +46,7 @@ export default {
   data: () => ({
     dataTable: {
       headers: [
-        { text: 'Disciplina', value: 'class' },
+        { text: 'Disciplina', value: 'class.title' },
         { text: 'Ano', value: 'year' },
         { text: 'Semestre', value: 'semester' },
         { text: 'Excluir', value: 'delete' },
