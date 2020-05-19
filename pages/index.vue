@@ -1,30 +1,29 @@
 <template>
   <div>
-    <!--
-    -->
     <apex-chart
       v-if="trigger"
       width="500"
       type="bar"
       :options="chartOptions"
       :series="series"
-    ></apex-chart>
+    />
   </div>
 </template>
 
 <script>
-// Include Dependencies
+// Include Dependencies (ERROR, lazy load fix)
 // import VueApexCharts from 'vue-apexcharts';
 
 export default {
   name: 'HomePage',
 
   components: {
-    // eslint-disable-next-line vue/no-unused-components
+    // lazy load necessary, but component is only started on mounted
     apexChart: () => import('vue-apexcharts'),
   },
 
   data: () => ({
+    // trigger used to activate the charts after the lazy load
     trigger: false,
     chartOptions: {
       chart: {
@@ -38,11 +37,7 @@ export default {
     loadTest: [],
   }),
 
-  computed: {
-    averageVsIteration() {
-      return this.$store.getters['charts/averageVsIteration/getClasses'];
-    },
-  },
+  computed: {},
 
   mounted() {
     this.mountChart();
@@ -51,15 +46,20 @@ export default {
 
   methods: {
     mountChart() {
+      // returs the year+semester combinations with avaliable data
       const categories = this.$store.getters[
         'charts/averageVsIteration/getCategories'
       ];
+      // sets the year+semester combinations on the x axis
+      this.chartOptions.xaxis.categories = [...categories];
+
+      // returns the averages by year/semester on all avaliable classes
       const classes = this.$store.getters[
         'charts/averageVsIteration/getClasses'
       ];
-      this.chartOptions.xaxis.categories = [...categories];
+      // sets each class with a series on the chart
       classes.forEach((element, index) => {
-        this.series.push({ name: element.title, data: element.data });
+        this.series.push({ name: element.id, data: element.data });
       });
     },
   },
