@@ -1,27 +1,28 @@
 export const state = () => ({
+  // classes [{ year: number, semester: number(1/2), average: number' id: string}]
   classes: [
     {
-      id: '12uo0910',
+      id: 'IA',
       data: [
-        { year: 2011, semester: 1, class_average: 1, id: '2011.1' },
-        { year: 2012, semester: 1, class_average: 2, id: '2012.1' },
-        { year: 2013, semester: 1, class_average: 3, id: '2013.1' },
+        { year: 2011, semester: 1, average: 1, id: '2011.1' },
+        { year: 2012, semester: 1, average: 2, id: '2012.1' },
+        { year: 2013, semester: 1, average: 3, id: '2013.1' },
       ],
     },
     {
-      id: '5154oeu',
+      id: 'ED',
       data: [
-        { year: 2009, semester: 1, class_average: 5, id: '2009.1' },
-        { year: 2010, semester: 1, class_average: 6, id: '2010.1' },
-        { year: 2011, semester: 1, class_average: 7, id: '2011.1' },
+        { year: 2009, semester: 1, average: 5, id: '2009.1' },
+        { year: 2010, semester: 1, average: 6, id: '2010.1' },
+        { year: 2011, semester: 1, average: 7, id: '2011.1' },
       ],
     },
     {
-      id: 'eoiu43',
+      id: 'Calculo',
       data: [
-        { year: 2010, semester: 1, class_average: 8, id: '2010.1' },
-        { year: 2011, semester: 1, class_average: 9, id: '2011.1' },
-        { year: 2012, semester: 1, class_average: 10, id: '2012.1' },
+        { year: 2010, semester: 1, average: 8, id: '2010.1' },
+        { year: 2011, semester: 1, average: 9, id: '2011.1' },
+        { year: 2012, semester: 1, average: 10, id: '2012.1' },
       ],
     },
   ],
@@ -46,7 +47,7 @@ export const getters = {
         const value = classObj.data.find((x) => x.id === category);
         // check to avoid undefined.push()
         if (value) {
-          returnClass.data.push(value.class_average);
+          returnClass.data.push(value.average);
         } else {
           returnClass.data.push(0);
         }
