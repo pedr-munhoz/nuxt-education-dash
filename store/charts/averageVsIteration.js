@@ -55,6 +55,15 @@ export const getters = {
     });
     return returnClasses;
   },
+  getClassesPure(state) {
+    return state.classes;
+  },
+  getClassIndex: (state, getters) => (possibleClass) => {
+    const theClass = getters.getClassesPure.find(
+      (element) => element.id === possibleClass.id,
+    );
+    return getters.getClassesPure.indexOf(theClass);
+  },
   getCategories(state) {
     const sheets = [];
     state.classes.forEach((element) => {
@@ -75,13 +84,39 @@ export const getters = {
 };
 
 export const mutations = {
-  ADD_CLASS(state) {},
-  SET_CLASSES(state) {},
-  REMOVE_CATEGORY(state) {},
-  REMOVE_CLASS(state) {},
+  ADD_CLASS(state, newClass) {
+    newClass.data.id = `${newClass.data.year}.${newClass.data.semester}`;
+    newClass.data = [newClass.data];
+    state.classes.push(newClass);
+  },
+  SET_CLASS(state, newClass) {
+    const currentClass = state.classes.find(
+      (element) => element.id === newClass.id,
+    );
+    if (currentClass) {
+      newClass.data.id = `${newClass.data.year}.${newClass.data.semester}`;
+      currentClass.data.push(newClass.data);
+    }
+  },
+  REMOVE_CLASS(state, index) {
+    state.classes.splice(index, 1);
+  },
 };
 
 export const actions = {
-  includeClass({ commit, getters }, newClass) {},
-  includeCategory({ commit, getters }, category) {},
+  parseSheet() {},
+  // recieves a class object (one year+semester instance) and adds it to the state
+  includeClass({ commit, getters }, newClass) {
+    if (getters.getClassIndex(newClass) >= 0) {
+      commit('SET_CLASS', newClass);
+    } else {
+      commit('ADD_CLASS', newClass);
+    }
+  },
+  // recieves a class object and deletes all data of it based on the .id attribute
+  deleteClass({ commit, getters }, oldClass) {
+    if (getters.getClassIndex(oldClass) >= 0) {
+      commit('REMOVE_CLASS', getters.getClassIndex(oldClass));
+    }
+  },
 };
