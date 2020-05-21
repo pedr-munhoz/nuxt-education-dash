@@ -34,7 +34,6 @@ export default {
       },
     },
     series: [],
-    loadTest: [],
   }),
 
   computed: {},
@@ -51,6 +50,14 @@ export default {
         'charts/averageVsIteration/getCategories'
       ];
       // sets the year+semester combinations on the x axis
+      this.chartOptions = {
+        ...this.chartOptions,
+        ...{
+          xaxis: {
+            categories: [],
+          },
+        },
+      };
       this.chartOptions.xaxis.categories = [...categories];
 
       // returns the averages by year/semester on all avaliable classes
@@ -58,6 +65,7 @@ export default {
         'charts/averageVsIteration/getClasses'
       ];
       // sets each class with a series on the chart
+      this.series = [];
       classes.forEach((element, index) => {
         this.series.push({ name: element.id, data: element.data });
       });
