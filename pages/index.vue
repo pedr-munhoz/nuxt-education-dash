@@ -69,7 +69,6 @@ export default {
       this.series = [];
       classes.forEach((element, index) => {
         this.series.push({ name: element.title, data: element.data });
-        console.log(element.title);
       });
     },
   },
