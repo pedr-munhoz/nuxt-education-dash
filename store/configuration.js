@@ -6,7 +6,7 @@ export const state = () => ({
     { title: 'Terceira avaliação', id: 'third_test', value: '' },
     { title: 'Quarta avaliação', id: 'fourth_test', value: '' },
     { title: 'Presença', id: 'attendance', value: '' },
-    { title: 'Média', id: 'score', value: '' },
+    { title: 'Média', id: 'final_score', value: '' },
     { title: 'Aprovação', id: 'approval', value: '' },
   ],
 });

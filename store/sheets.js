@@ -20,9 +20,10 @@ export const mutations = {
 };
 
 export const actions = {
-  saveSheet({ commit }, newSheet) {
+  saveSheet({ commit, dispatch }, newSheet) {
     const sheet = { ...newSheet, id: uuidv4() };
     commit('ADD_SHEET', sheet);
+    dispatch('charts/averageVsIteration/parseSheet', sheet, { root: true });
   },
   deleteSheet({ commit, state }, oldSheet) {
     const index = state.sheets_list.indexOf(oldSheet);

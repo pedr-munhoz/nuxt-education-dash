@@ -1,31 +1,6 @@
 export const state = () => ({
   // classes [{ year: number, semester: number(1/2), average: number' id: string}]
-  classes: [
-    {
-      id: 'IA',
-      data: [
-        { year: 2011, semester: 1, average: 1, id: '2011.1' },
-        { year: 2012, semester: 1, average: 2, id: '2012.1' },
-        { year: 2013, semester: 1, average: 3, id: '2013.1' },
-      ],
-    },
-    {
-      id: 'ED',
-      data: [
-        { year: 2009, semester: 1, average: 5, id: '2009.1' },
-        { year: 2010, semester: 1, average: 6, id: '2010.1' },
-        { year: 2011, semester: 1, average: 7, id: '2011.1' },
-      ],
-    },
-    {
-      id: 'Calculo',
-      data: [
-        { year: 2010, semester: 1, average: 8, id: '2010.1' },
-        { year: 2011, semester: 1, average: 9, id: '2011.1' },
-        { year: 2012, semester: 1, average: 10, id: '2012.1' },
-      ],
-    },
-  ],
+  classes: [],
 });
 
 export const getters = {
@@ -85,17 +60,15 @@ export const getters = {
 
 export const mutations = {
   ADD_CLASS(state, newClass) {
-    newClass.data.id = `${newClass.data.year}.${newClass.data.semester}`;
-    newClass.data = [newClass.data];
     state.classes.push(newClass);
   },
-  SET_CLASS(state, newClass) {
+  SET_CLASS(state, classIteration) {
     const currentClass = state.classes.find(
-      (element) => element.id === newClass.id,
+      (element) => element.id === classIteration.id,
     );
     if (currentClass) {
-      newClass.data.id = `${newClass.data.year}.${newClass.data.semester}`;
-      currentClass.data.push(newClass.data);
+      classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
+      currentClass.data.push(classIteration.data);
     }
   },
   REMOVE_CLASS(state, index) {
@@ -104,13 +77,33 @@ export const mutations = {
 };
 
 export const actions = {
-  parseSheet() {},
+  parseSheet({ dispatch }, sheet) {
+    const sum = sheet.data.reduce((sum, element) => {
+      return sum + element.final_score;
+    }, 0);
+    const average = sum / sheet.data.length;
+    const classIteration = {
+      id: sheet.class.id,
+      title: sheet.class.title,
+      data: {
+        year: sheet.year,
+        semester: sheet.semester,
+        average: average.toFixed(1),
+      },
+    };
+    dispatch('includeClassIteration', classIteration);
+  },
   // recieves a class object (one year+semester instance) and adds it to the state
-  includeClass({ commit, getters }, newClass) {
-    if (getters.getClassIndex(newClass) >= 0) {
-      commit('SET_CLASS', newClass);
+  includeClassIteration({ commit, getters }, classIteration) {
+    if (getters.getClassIndex(classIteration) >= 0) {
+      commit('SET_CLASS', classIteration);
     } else {
-      commit('ADD_CLASS', newClass);
+      classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
+      commit('ADD_CLASS', {
+        id: classIteration.id,
+        title: classIteration.title,
+        data: [classIteration.data],
+      });
     }
   },
   // recieves a class object and deletes all data of it based on the .id attribute
