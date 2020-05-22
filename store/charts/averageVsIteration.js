@@ -1,5 +1,5 @@
 export const state = () => ({
-  // classes [{ year: number, semester: number(1/2), average: number' id: string}]
+  // classes [id,[{ year: number, semester: number(1/2), average: number' id: string}]]
   classes: [],
 });
 
@@ -7,13 +7,13 @@ export const getters = {
   getClasses(state, getters) {
     const returnClasses = [];
     // criate an object for every year/semester in record
-    const categories = getters.getCategories;
+    const iterations = getters.getIterations;
     state.classes.forEach((element) => {
       returnClasses.push({ id: element.id });
     });
     returnClasses.forEach((returnClass) => {
       returnClass.data = [];
-      categories.forEach((category) => {
+      iterations.forEach((category) => {
         // finds the class matching the current class.id
         const classObj = state.classes.find(
           (element) => element.id === returnClass.id,
@@ -39,7 +39,7 @@ export const getters = {
     );
     return getters.getClassesPure.indexOf(theClass);
   },
-  getCategories(state) {
+  getIterations(state) {
     const sheets = [];
     state.classes.forEach((element) => {
       element.data.forEach((e) => {
@@ -49,11 +49,16 @@ export const getters = {
     sheets.sort(
       (a, b) => a.year + 0.5 * a.semester - (b.year + 0.5 * b.semester),
     );
-    sheets.categories = [];
-    sheets.forEach((element) => {
-      sheets.categories.push(`${element.year}.${element.semester}`);
-    });
-    const uniques = [...new Set(sheets.categories)];
+    sheets.iterations = [];
+    for (
+      let year = sheets[0].year;
+      year <= sheets[sheets.length - 1].year;
+      year++
+    ) {
+      sheets.iterations.push(`${year}.1`);
+      sheets.iterations.push(`${year}.2`);
+    }
+    const uniques = [...new Set(sheets.iterations)];
     return uniques;
   },
 };
@@ -63,12 +68,12 @@ export const mutations = {
     state.classes.push(newClass);
   },
   SET_CLASS(state, classIteration) {
-    const currentClass = state.classes.find(
+    const theClass = state.classes.find(
       (element) => element.id === classIteration.id,
     );
-    if (currentClass) {
+    if (theClass) {
       classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
-      currentClass.data.push(classIteration.data);
+      theClass.data.push(classIteration.data);
     }
   },
   REMOVE_CLASS(state, index) {

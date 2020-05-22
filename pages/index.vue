@@ -48,7 +48,7 @@ export default {
     mountChart() {
       // returs the year+semester combinations with avaliable data
       const categories = this.$store.getters[
-        'charts/averageVsIteration/getCategories'
+        'charts/averageVsIteration/getIterations'
       ];
       // sets the year+semester combinations on the x axis
       this.chartOptions = {
