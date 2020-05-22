@@ -9,7 +9,7 @@ export const getters = {
     // criate an object for every year/semester in record
     const iterations = getters.getIterations;
     state.classes.forEach((element) => {
-      returnClasses.push({ id: element.id });
+      returnClasses.push({ id: element.id, title: element.title });
     });
     returnClasses.forEach((returnClass) => {
       returnClass.data = [];
@@ -40,6 +40,9 @@ export const getters = {
     return getters.getClassesPure.indexOf(theClass);
   },
   getIterations(state) {
+    if (state.classes.length === 0) {
+      return [];
+    }
     const sheets = [];
     state.classes.forEach((element) => {
       element.data.forEach((e) => {
@@ -83,10 +86,13 @@ export const mutations = {
 
 export const actions = {
   parseSheet({ dispatch }, sheet) {
-    const sum = sheet.data.reduce((sum, element) => {
+    const filteredAverages = sheet.data.filter(
+      (element) => element.final_score,
+    );
+    const sum = filteredAverages.reduce((sum, element) => {
       return sum + element.final_score;
     }, 0);
-    const average = sum / sheet.data.length;
+    const average = sum / filteredAverages.length;
     const classIteration = {
       id: sheet.class.id,
       title: sheet.class.title,

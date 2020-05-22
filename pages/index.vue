@@ -2,7 +2,8 @@
   <div>
     <apex-chart
       v-if="trigger"
-      width="500"
+      width="80%"
+      height="300px"
       type="bar"
       :options="chartOptions"
       :series="series"
@@ -34,7 +35,6 @@ export default {
       },
     },
     series: [],
-    test: { v1: '', v2: '', v3: '' },
   }),
 
   computed: {},
@@ -69,13 +69,7 @@ export default {
       this.series = [];
       classes.forEach((element, index) => {
         this.series.push({ name: element.title, data: element.data });
-      });
-    },
-
-    testFunction() {
-      this.$store.dispatch('charts/averageVsIteration/parseSheet', {
-        id: this.test.v1,
-        data: { year: this.test.v3, semester: 1, average: this.test.v2 },
+        console.log(element.title);
       });
     },
   },
