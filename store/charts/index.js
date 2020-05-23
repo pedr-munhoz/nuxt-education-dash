@@ -33,6 +33,9 @@ export const mutations = {
     if (theClass) {
       classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
       theClass.data.push(classIteration.data);
+      theClass.data.sort(
+        (a, b) => a.year + 0.5 * a.semester - (b.year + 0.5 * b.semester),
+      );
     }
   },
   REMOVE_CLASS(state, index) {
@@ -91,7 +94,7 @@ export const actions = {
   },
 
   // checks for helper update (years/sizes max/min)
-  updateHelpers({ commit }, obj) {
+  updateHelpers({ state, commit }, obj) {
     if (obj.year < state.years.low) {
       commit('SET_YEARS', {
         low: obj.year,
@@ -105,12 +108,12 @@ export const actions = {
     }
 
     if (obj.size < state.sizes.low) {
-      commit('SET_YEARS', {
+      commit('SET_SIZES', {
         low: obj.size,
         high: state.sizes.high,
       });
     } else if (obj.size > state.sizes.high) {
-      commit('SET_YEARS', {
+      commit('SET_SIZES', {
         low: state.sizes.low,
         high: obj.size,
       });
