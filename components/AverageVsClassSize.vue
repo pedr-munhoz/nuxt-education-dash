@@ -46,15 +46,24 @@ export default {
 
   methods: {
     mountChart() {
+      const categories = this.$store.getters[
+        'charts/averageVsClassSize/getSizes'
+      ];
       this.chartOptions = {
         ...this.chartOptions,
         ...{
           xaxis: {
-            categories: [],
+            categories: [...categories],
           },
         },
       };
+      const classes = this.$store.getters[
+        'charts/averageVsClassSize/getClasses'
+      ];
       this.series = [];
+      classes.forEach((element, index) => {
+        this.series.push({ name: element.title, data: element.data });
+      });
     },
   },
 };

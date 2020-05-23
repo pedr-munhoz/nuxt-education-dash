@@ -1,9 +1,9 @@
 export const state = () => ({
-  classes: [
-    {
-      id: '230940239',
-      data: [{ id: '2010.2', year: 2010, semester: 2, average: 8, size: 28 }],
-    },
+  classes: [],
+  classes_alt: [
+    { id: 'IA', year: 2010, semester: 2, average: 8, size: 28 },
+    { id: 'IA', year: 2011, semester: 2, average: 7, size: 38 },
+    { id: 'ED', year: 2010, semester: 2, average: 9, size: 20 },
   ],
 });
 
@@ -45,7 +45,8 @@ export const actions = {
     const sum = filteredAverages.reduce((sum, element) => {
       return sum + element.final_score;
     }, 0);
-    const average = sum / filteredAverages.length;
+    const classSize = filteredAverages.length;
+    const average = sum / classSize;
     const classIteration = {
       id: sheet.class.id,
       title: sheet.class.title,
@@ -53,6 +54,7 @@ export const actions = {
         year: sheet.year,
         semester: sheet.semester,
         average: average.toFixed(1),
+        size: classSize,
       },
     };
     dispatch('includeClassIteration', classIteration);

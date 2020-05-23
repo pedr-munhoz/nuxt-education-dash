@@ -27,10 +27,10 @@ export const getters = {
   },
 
   getIterations(state, getters, rootState) {
+    const sheets = [];
     if (rootState.charts.classes.length === 0) {
       return [];
     }
-    const sheets = [];
     rootState.charts.classes.forEach((element) => {
       element.data.forEach((e) => {
         sheets.push({ year: e.year, semester: e.semester });
