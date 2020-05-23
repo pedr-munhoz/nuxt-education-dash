@@ -43,6 +43,7 @@ export const getters = {
     const allSizes = getters.getSizes;
     const smallerSize = allSizes[0];
     const data = [];
+    const trigger = false;
     for (let index = 0; index < allSizes.length; index++) {
       data.push(0);
     }
@@ -56,7 +57,22 @@ export const getters = {
         data: [...data],
       };
       element.data.forEach((e) => {
-        aClass.data[e.size - smallerSize] = e.average;
+        const i = e.size - smallerSize;
+        if (aClass.data[i] === 0) {
+          aClass.data[i] = e.average;
+        } else if (!trigger) {
+          const aux = aClass.data[i];
+          aClass.data[i] = [];
+          aClass.data[i] = [aux, e.average];
+        } else {
+          aClass.data[i].push(e.average);
+        }
+        if (trigger) {
+          const sum = aClass.data[i].reduce((sum, value) => {
+            return sum + value;
+          }, 0);
+          aClass.data[i] = sum / aClass.length;
+        }
       });
       returnClasses.push(aClass);
     });
