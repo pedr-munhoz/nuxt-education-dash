@@ -27,28 +27,17 @@ export const getters = {
   },
 
   getIterations(state, getters, rootState) {
-    const sheets = [];
-    if (rootState.charts.classes.length === 0) {
-      return [];
+    const iterations = [];
+    if (rootState.charts.classes.length !== 0) {
+      for (
+        let year = rootState.charts.years.low;
+        year <= rootState.charts.years.high;
+        year++
+      ) {
+        iterations.push(`${year}.1`);
+        iterations.push(`${year}.2`);
+      }
     }
-    rootState.charts.classes.forEach((element) => {
-      element.data.forEach((e) => {
-        sheets.push({ year: e.year, semester: e.semester });
-      });
-    });
-    sheets.sort(
-      (a, b) => a.year + 0.5 * a.semester - (b.year + 0.5 * b.semester),
-    );
-    sheets.iterations = [];
-    for (
-      let year = sheets[0].year;
-      year <= sheets[sheets.length - 1].year;
-      year++
-    ) {
-      sheets.iterations.push(`${year}.1`);
-      sheets.iterations.push(`${year}.2`);
-    }
-    const uniques = [...new Set(sheets.iterations)];
-    return uniques;
+    return iterations;
   },
 };

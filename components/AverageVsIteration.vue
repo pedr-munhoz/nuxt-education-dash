@@ -41,7 +41,6 @@ export default {
 
   mounted() {
     this.mountChart();
-    this.trigger = true;
   },
 
   methods: {
@@ -70,6 +69,7 @@ export default {
       classes.forEach((element, index) => {
         this.series.push({ name: element.title, data: element.data });
       });
+      this.trigger = true;
     },
   },
 };

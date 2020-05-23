@@ -58,12 +58,10 @@ export default {
         },
       };
       const classes = this.$store.getters[
-        'charts/averageVsClassSize/getClasses'
+        'charts/averageVsClassSize/getAverages'
       ];
       this.series = [];
-      classes.forEach((element, index) => {
-        this.series.push({ name: element.title, data: element.data });
-      });
+      this.series.push({ name: '', data: classes });
     },
   },
 };

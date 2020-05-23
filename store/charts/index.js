@@ -1,10 +1,13 @@
 export const state = () => ({
   classes: [],
-  classes_alt: [
-    { id: 'IA', year: 2010, semester: 2, average: 8, size: 28 },
-    { id: 'IA', year: 2011, semester: 2, average: 7, size: 38 },
-    { id: 'ED', year: 2010, semester: 2, average: 9, size: 20 },
-  ],
+  years: {
+    low: null,
+    high: null,
+  },
+  sizes: {
+    low: null,
+    high: null,
+  },
 });
 
 export const getters = {
@@ -35,10 +38,16 @@ export const mutations = {
   REMOVE_CLASS(state, index) {
     state.classes.splice(index, 1);
   },
+  SET_YEARS(state, years) {
+    state.years = years;
+  },
+  SET_SIZES(state, sizes) {
+    state.sizes = sizes;
+  },
 };
 
 export const actions = {
-  parseSheet({ dispatch }, sheet) {
+  parseSheet({ commit, dispatch }, sheet) {
     const filteredAverages = sheet.data.filter(
       (element) => element.final_score,
     );
@@ -60,9 +69,13 @@ export const actions = {
     dispatch('includeClassIteration', classIteration);
   },
   // recieves a class object (one year+semester instance) and adds it to the state
-  includeClassIteration({ commit, getters }, classIteration) {
+  includeClassIteration({ commit, getters, dispatch }, classIteration) {
     if (getters.getClassIndex(classIteration) >= 0) {
       commit('SET_CLASS', classIteration);
+      dispatch('updateHelpers', {
+        year: classIteration.data.year,
+        size: classIteration.data.size,
+      });
     } else {
       classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
       commit('ADD_CLASS', {
@@ -70,8 +83,53 @@ export const actions = {
         title: classIteration.title,
         data: [classIteration.data],
       });
+      dispatch('initiateHelpers', {
+        year: classIteration.data.year,
+        size: classIteration.data.size,
+      });
     }
   },
+
+  // checks for helper update (years/sizes max/min)
+  updateHelpers({ commit }, obj) {
+    if (obj.year < state.years.low) {
+      commit('SET_YEARS', {
+        low: obj.year,
+        high: state.years.high,
+      });
+    } else if (obj.year > state.years.high) {
+      commit('SET_YEARS', {
+        low: state.years.low,
+        high: obj.year,
+      });
+    }
+
+    if (obj.size < state.sizes.low) {
+      commit('SET_YEARS', {
+        low: obj.size,
+        high: state.sizes.high,
+      });
+    } else if (obj.size > state.sizes.high) {
+      commit('SET_YEARS', {
+        low: state.sizes.low,
+        high: obj.size,
+      });
+    }
+  },
+
+  // sets initial values for helpers (years/sizes max/min)
+  initiateHelpers({ commit }, obj) {
+    commit('SET_YEARS', {
+      low: obj.year,
+      high: obj.year,
+    });
+
+    commit('SET_SIZES', {
+      low: obj.size,
+      high: obj.size,
+    });
+  },
+
   // recieves a class object and deletes all data of it based on the .id attribute
   deleteClass({ commit, getters }, oldClass) {
     if (getters.getClassIndex(oldClass) >= 0) {
