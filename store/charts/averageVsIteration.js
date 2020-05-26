@@ -1,39 +1,26 @@
 export const getters = {
-  getClasses(state, getters, rootState) {
-    const returnClasses = [];
-    // criate an object for every year/semester in record
-    const iterations = getters.getIterations;
-    rootState.charts.classes.forEach((element) => {
-      returnClasses.push({ id: element.id, title: element.title });
-    });
-    returnClasses.forEach((returnClass) => {
-      returnClass.data = [];
-      iterations.forEach((category) => {
-        // finds the class matching the current class.id
-        const classObj = rootState.charts.classes.find(
-          (element) => element.id === returnClass.id,
-        );
-        // finds the register of the class in this year/semester
-        const value = classObj.data.find((x) => x.id === category);
-        // check to avoid undefined.push()
-        if (value) {
-          returnClass.data.push(value.average);
-        } else {
-          returnClass.data.push(0);
-        }
+  getAverages(state, getters, rootState, rootGetters) {
+    const allIterations = getters.getIterations;
+    const allClasses = rootGetters['charts/getClassesPure'];
+    const allAverages = [];
+    const { years } = rootGetters['charts/getLandmarks'];
+    allClasses.forEach((element) => {
+      const { data, ...thisClass } = element;
+      thisClass.data = Array(allIterations.length).fill(0);
+      element.data.forEach((e) => {
+        const index = 2 * (e.year - years.low) + e.semester - 1;
+        thisClass.data[index] = e.average;
       });
+      allAverages.push(thisClass);
     });
-    return returnClasses;
+    return allAverages;
   },
 
-  getIterations(state, getters, rootState) {
+  getIterations(state, getters, rootState, rootGetters) {
     const iterations = [];
-    if (rootState.charts.classes.length !== 0) {
-      for (
-        let year = rootState.charts.years.low;
-        year <= rootState.charts.years.high;
-        year++
-      ) {
+    const { years } = rootGetters['charts/getLandmarks'];
+    if (rootGetters['charts/getClassesPure'].length !== 0) {
+      for (let year = years.low; year <= years.high; year++) {
         iterations.push(`${year}.1`);
         iterations.push(`${year}.2`);
       }
