@@ -49,6 +49,11 @@ export default {
       const categories = this.$store.getters[
         'charts/averageVsIteration/getIterations'
       ];
+
+      // returns the averages by year/semester on all avaliable classes
+      const classes = this.$store.getters[
+        'charts/averageVsIteration/getAverages'
+      ];
       // sets the year+semester combinations on the x axis
       this.chartOptions = {
         ...this.chartOptions,
@@ -59,11 +64,6 @@ export default {
         },
       };
       this.chartOptions.xaxis.categories = [...categories];
-
-      // returns the averages by year/semester on all avaliable classes
-      const classes = this.$store.getters[
-        'charts/averageVsIteration/getClasses'
-      ];
       // sets each class with a series on the chart
       this.series = [];
       classes.forEach((element, index) => {
