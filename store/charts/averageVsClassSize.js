@@ -1,23 +1,22 @@
 export const getters = {
-  getSizes(state, getters, rootState) {
+  getSizes(state, getters, rootState, rootGetters) {
     const returnSizes = [];
-    if (rootState.charts.classes.length !== 0) {
-      for (
-        let i = rootState.charts.sizes.low;
-        i <= rootState.charts.sizes.high;
-        i++
-      ) {
-        returnSizes.push(i);
+    const { sizes } = rootGetters['charts/getLandmarks'];
+    if (rootGetters['charts/getClassesPure'].length !== 0) {
+      for (let index = sizes.low; index <= sizes.high; index++) {
+        returnSizes.push(index);
       }
     }
     return returnSizes;
   },
 
-  getAverages(state, getters, rootState) {
+  getAverages(state, getters, rootState, rootGetters) {
     const allAverages = Array(getters.getSizes.length).fill(0);
-    rootState.charts.classes.forEach((element) => {
+    const { sizes } = rootGetters['charts/getLandmarks'];
+    const allClasses = rootGetters['charts/getClassesPure'];
+    allClasses.forEach((element) => {
       element.data.forEach((e) => {
-        const index = e.size - rootState.charts.sizes.low;
+        const index = e.size - sizes.low;
         allAverages[index] = e.average;
       });
     });
