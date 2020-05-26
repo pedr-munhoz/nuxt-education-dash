@@ -14,10 +14,12 @@ export const getters = {
     const allAverages = Array(getters.getSizes.length).fill(0);
     const { sizes } = rootGetters['charts/getLandmarks'];
     const allClasses = rootGetters['charts/getClassesPure'];
-    allClasses.forEach((element) => {
+    let allTimeAverage;
+    allClasses.forEach((element, index) => {
+      allTimeAverage = rootGetters['charts/getAverageAllTime'](index);
       element.data.forEach((e) => {
         const index = e.size - sizes.low;
-        allAverages[index] = e.average;
+        allAverages[index] = +(e.average - allTimeAverage).toFixed(2);
       });
     });
     return allAverages;

@@ -30,6 +30,24 @@ export default {
       chart: {
         id: 'vuechart-example',
       },
+      plotOptions: {
+        bar: {
+          colors: {
+            ranges: [
+              {
+                from: -100,
+                to: -46,
+                color: '#F15B46',
+              },
+              {
+                from: -45,
+                to: 0,
+                color: '#FEB019',
+              },
+            ],
+          },
+        },
+      },
       xaxis: {
         categories: [],
       },

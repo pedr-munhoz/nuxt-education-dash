@@ -20,6 +20,10 @@ export const getters = {
     );
     return getters.getClassesPure.indexOf(theClass);
   },
+  getAverageAllTime: (state) => (index) => {
+    const value = state.classes[index].sum / state.classes[index].data.length;
+    return value;
+  },
   getLandmarks(state) {
     return { years: state.years, sizes: state.sizes };
   },
@@ -27,7 +31,7 @@ export const getters = {
 
 export const mutations = {
   ADD_CLASS(state, newClass) {
-    state.classes.push(newClass);
+    state.classes.push({ ...newClass, sum: newClass.data[0].average });
   },
   SET_CLASS(state, classIteration) {
     const theClass = state.classes.find(
@@ -36,9 +40,7 @@ export const mutations = {
     if (theClass) {
       classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
       theClass.data.push(classIteration.data);
-      theClass.data.sort(
-        (a, b) => a.year + 0.5 * a.semester - (b.year + 0.5 * b.semester),
-      );
+      theClass.sum += classIteration.data.average;
     }
   },
   REMOVE_CLASS(state, index) {
@@ -68,7 +70,7 @@ export const actions = {
       data: {
         year: sheet.year,
         semester: sheet.semester,
-        average: average.toFixed(1),
+        average: +average.toFixed(1),
         size: classSize,
       },
     };
@@ -103,13 +105,11 @@ export const actions = {
   // checks for helper update (years/sizes max/min)
   updateHelpers({ state, commit }, obj) {
     if (obj.year < state.years.low) {
-      console.log('ano novo < menor ano antigo');
       commit('SET_YEARS', {
         low: obj.year,
         high: state.years.high,
       });
     } else if (obj.year > state.years.high) {
-      console.log('ano novo > maior ano antigo');
       commit('SET_YEARS', {
         low: state.years.low,
         high: obj.year,
@@ -131,7 +131,6 @@ export const actions = {
 
   // sets initial values for helpers (years/sizes max/min)
   initiateHelpers({ commit }, obj) {
-    console.log('initiate');
     commit('SET_YEARS', {
       low: obj.year,
       high: obj.year,
