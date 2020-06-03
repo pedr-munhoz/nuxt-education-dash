@@ -16,7 +16,7 @@ export const getters = {
     const allClasses = rootGetters['charts/getClassesPure'];
     let allTimeAverage;
     allClasses.forEach((element, index) => {
-      allTimeAverage = rootGetters['charts/getAverageAllTime'](index);
+      allTimeAverage = rootGetters['charts/getClassAverageAllTime'](index);
       element.data.forEach((e) => {
         const index = e.size - sizes.low;
         allAverages[index] = +(e.average - allTimeAverage).toFixed(2);

@@ -20,7 +20,7 @@ export const getters = {
     );
     return getters.getClassesPure.indexOf(theClass);
   },
-  getAverageAllTime: (state) => (index) => {
+  getClassAverageAllTime: (state) => (index) => {
     const value = state.classes[index].sum / state.classes[index].data.length;
     return value;
   },
