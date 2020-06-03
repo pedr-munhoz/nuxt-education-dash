@@ -27,6 +27,12 @@ export const getters = {
   getLandmarks(state) {
     return { years: state.years, sizes: state.sizes };
   },
+  getTestAverageAllTime: (state) => (index, test) => {
+    const sum = state.classes[index].data.reduce((sum, element) => {
+      return sum + element[test];
+    }, 0);
+    return sum / state.classes[index].data.length;
+  },
 };
 
 export const mutations = {
@@ -59,11 +65,9 @@ export const actions = {
     const filteredAverages = sheet.data.filter(
       (element) => element.final_score,
     );
-    const sum = filteredAverages.reduce((sum, element) => {
-      return sum + element.final_score;
-    }, 0);
     const classSize = filteredAverages.length;
-    const average = sum / classSize;
+    const average = getAverage(filteredAverages, 'final_score');
+
     const classIteration = {
       id: sheet.class.id,
       title: sheet.class.title,
@@ -71,9 +75,14 @@ export const actions = {
         year: sheet.year,
         semester: sheet.semester,
         average: +average.toFixed(1),
+        first_test: +getAverage(filteredAverages, 'first_test').toFixed(1),
+        second_test: +getAverage(filteredAverages, 'second_test').toFixed(1),
+        third_test: +getAverage(filteredAverages, 'third_test').toFixed(1),
+        fourth_test: +getAverage(filteredAverages, 'fourth_test').toFixed(1),
         size: classSize,
       },
     };
+    getAverage(filteredAverages, 'first_test');
     dispatch('includeClassIteration', classIteration);
   },
   // recieves a class object (one year+semester instance) and adds it to the state
@@ -149,3 +158,15 @@ export const actions = {
     }
   },
 };
+
+function getAverage(students, param) {
+  let sum = 0;
+  let counter = 0;
+  students.forEach((element) => {
+    if (!isNaN(element[param])) {
+      sum += element[param];
+      counter++;
+    }
+  });
+  return sum / counter;
+}
