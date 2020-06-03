@@ -1,7 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export const state = () => ({
-  classes_list: [],
+  classes_list: [
+    { id: '1', title: 'IA' },
+    { id: '2', title: 'ED' },
+  ],
 });
 
 export const getters = {

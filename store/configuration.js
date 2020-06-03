@@ -1,10 +1,10 @@
 export const state = () => ({
   configuration_fields: [
     { title: 'ID aluno', id: 'studant_id', value: '' },
-    { title: 'Primeira avaliação', id: 'first_test', value: '' },
-    { title: 'Segunda avaliação', id: 'second_test', value: '' },
-    { title: 'Terceira avaliação', id: 'third_test', value: '' },
-    { title: 'Quarta avaliação', id: 'fourth_test', value: '' },
+    { title: 'Primeira avaliação', id: 'first_test', value: 'P1' },
+    { title: 'Segunda avaliação', id: 'second_test', value: 'P2' },
+    { title: 'Terceira avaliação', id: 'third_test', value: 'T1' },
+    { title: 'Quarta avaliação', id: 'fourth_test', value: 'T2' },
     { title: 'Presença', id: 'attendance', value: '' },
     { title: 'Média', id: 'final_score', value: 'MÉDIA' },
     { title: 'Aprovação', id: 'approval', value: '' },
