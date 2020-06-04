@@ -8,6 +8,16 @@
       :options="chartOptions"
       :series="series"
     />
+    <v-card-actions>
+      <v-select
+        v-model="select.value"
+        :items="select.items"
+        item-text="title"
+        return-object
+        label="Matéria"
+        @change="mountChart()"
+      />
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -26,7 +36,6 @@ export default {
   data: () => ({
     // trigger used to activate the charts after the lazy load
     trigger: false,
-    classSelct: 0,
     chartOptions: {
       chart: {
         id: 'vuechart-example',
@@ -36,6 +45,10 @@ export default {
       },
     },
     series: [],
+    select: {
+      items: [],
+      value: { index: 0 },
+    },
   }),
 
   computed: {
@@ -58,6 +71,7 @@ export default {
       },
     };
     this.chartOptions.xaxis.categories = [...this.configurationFields];
+    this.select.value.index = 0;
     this.mountChart();
   },
 
@@ -66,16 +80,20 @@ export default {
       const allClasses = this.$store.getters[
         'charts/averageStudent/getStudents'
       ];
-      if (allClasses[this.classSelct]) {
+      this.select.items = [];
+      allClasses.forEach((element, index) => {
+        this.select.items.push({ title: element.title, index });
+      });
+      if (allClasses[this.select.value.index]) {
         this.series = [];
         this.series.push({
-          name: allClasses[this.classSelct].title,
+          name: allClasses[this.select.value.index].title,
           data: [
-            allClasses[this.classSelct].first_test,
-            allClasses[this.classSelct].second_test,
-            allClasses[this.classSelct].third_test,
-            allClasses[this.classSelct].fourth_test,
-            allClasses[this.classSelct].final_score,
+            allClasses[this.select.value.index].first_test,
+            allClasses[this.select.value.index].second_test,
+            allClasses[this.select.value.index].third_test,
+            allClasses[this.select.value.index].fourth_test,
+            allClasses[this.select.value.index].final_score,
           ],
         });
       }
