@@ -31,7 +31,7 @@ export const getters = {
     const sum = state.classes[index].data.reduce((sum, element) => {
       return sum + element[test];
     }, 0);
-    return sum / state.classes[index].data.length;
+    return +(sum / state.classes[index].data.length).toFixed(1);
   },
 };
 
@@ -74,11 +74,11 @@ export const actions = {
       data: {
         year: sheet.year,
         semester: sheet.semester,
-        average: +average.toFixed(1),
-        first_test: +getAverage(filteredAverages, 'first_test').toFixed(1),
-        second_test: +getAverage(filteredAverages, 'second_test').toFixed(1),
-        third_test: +getAverage(filteredAverages, 'third_test').toFixed(1),
-        fourth_test: +getAverage(filteredAverages, 'fourth_test').toFixed(1),
+        average,
+        first_test: getAverage(filteredAverages, 'first_test'),
+        second_test: getAverage(filteredAverages, 'second_test'),
+        third_test: getAverage(filteredAverages, 'third_test'),
+        fourth_test: getAverage(filteredAverages, 'fourth_test'),
         size: classSize,
       },
     };
@@ -168,5 +168,5 @@ function getAverage(students, param) {
       counter++;
     }
   });
-  return sum / counter;
+  return +(sum / counter).toFixed(1);
 }
