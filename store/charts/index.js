@@ -46,6 +46,9 @@ export const mutations = {
     if (theClass) {
       classIteration.data.id = `${classIteration.data.year}.${classIteration.data.semester}`;
       theClass.data.push(classIteration.data);
+      theClass.data.sort(
+        (a, b) => a.year + 0.5 * a.semester - (b.year + 0.5 * b.semester),
+      );
       theClass.sum += classIteration.data.average;
     }
   },
