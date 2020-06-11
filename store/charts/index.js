@@ -82,6 +82,7 @@ export const actions = {
         second_test: getAverage(filteredAverages, 'second_test'),
         third_test: getAverage(filteredAverages, 'third_test'),
         fourth_test: getAverage(filteredAverages, 'fourth_test'),
+        attendance: getAverage(filteredAverages, 'attendance'),
         size: classSize,
       },
     };

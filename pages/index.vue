@@ -1,10 +1,10 @@
 <template>
   <div>
+    <attendance-vs-iteration />
+    <v-divider />
     <class-overview />
     <v-divider />
     <average-student />
-    <v-divider />
-    <average-vs-class-size v-if="false" />
     <v-divider />
     <average-vs-iteration />
   </div>
@@ -12,18 +12,18 @@
 
 <script>
 import AverageVsIteration from '@/components/AverageVsIteration.vue';
-import AverageVsClassSize from '@/components/AverageVsClassSize.vue';
 import AverageStudent from '@/components/AverageStudent.vue';
 import ClassOverview from '@/components/ClassOverview.vue';
+import AttendanceVsIteration from '@/components/AttendanceVsIteration.vue';
 
 export default {
   name: 'HomePage',
 
   components: {
     AverageVsIteration,
-    AverageVsClassSize,
     AverageStudent,
     ClassOverview,
+    AttendanceVsIteration,
   },
 
   data: () => ({}),
@@ -32,11 +32,6 @@ export default {
 
   mounted() {},
 
-  methods: {
-    test() {
-      const x = this.$store.getters['charts/classOverview/getIterations'](0);
-      console.log(x);
-    },
-  },
+  methods: {},
 };
 </script>
