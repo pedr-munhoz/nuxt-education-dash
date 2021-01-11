@@ -4,7 +4,7 @@
       v-if="trigger"
       width="90%"
       height="300px"
-      type="bar"
+      type="line"
       :options="chartOptions"
       :series="series"
     />
